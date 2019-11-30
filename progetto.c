@@ -48,10 +48,10 @@ elemlistabidir* copialista(elemlistabidir *testacorrente)
 			spostamento++;
 		}
 		while(cursore!=NULL)
-		{		
+		{
 			elemlistabidir* temp = malloc(sizeof(elemlistabidir));
 			temp->R=NULL;
-			temp->L=NULL;			
+			temp->L=NULL;
 			strcpy(temp->charletto, cursore->charletto);
 			if(start2==NULL)
 			{
@@ -62,7 +62,7 @@ elemlistabidir* copialista(elemlistabidir *testacorrente)
 			{
 				previous->L=temp;
 				temp->R=previous;
-				previous=temp;          
+				previous=temp;
 			}
 			cursore=cursore->L;
 		}
@@ -70,13 +70,13 @@ elemlistabidir* copialista(elemlistabidir *testacorrente)
 		for (int i=0; i<spostamento; i++)
 		{
 			start2=start2->L;
-		} 
-		return start2;	
+		}
+		return start2;
 	}
 
 void push(bool final, int valuestatosucc, char valuescritto, int statoattt, char valuedirezione, elemlistabidir* testapushata, unsigned int prof, int poscarr)
 {
-    
+
     queue[rear].statosucc= valuestatosucc;
     queue[rear].scritto = valuescritto;
     queue[rear].statoatt = statoattt;
@@ -92,13 +92,13 @@ void push(bool final, int valuestatosucc, char valuescritto, int statoattt, char
   		sfora=true;
   	}
     return;
-    
-    
+
+
 }
 
 nodo pop()
 {
-	
+
     nodo n1;
     n1.statosucc = queue[front].statosucc;
     n1.scritto = queue[front].scritto;
@@ -113,49 +113,49 @@ nodo pop()
  	{
  		front=0;
  	}
-    return n1; 
-    
+    return n1;
+
 }
 
 
 void freestack()
-{	
+{
 	if (front!=rear && front<rear)
 	{
 		for (int i=front;i<rear;i++)
 		{
-					elemlistabidir *elim;
-					elemlistabidir *appoggio;
-					elim=queue[i].tbidirstack;
-					while (elim->L!=NULL)
-					{
-						elim=elim->L;
-					}
-					while (elim!=NULL)
-					{   	
-						appoggio=elim->R;
-						free(elim);
-						elim=appoggio;
-					}
-		}	
-	}				
+            elemlistabidir *elim;
+            elemlistabidir *appoggio;
+            elim=queue[i].tbidirstack;
+            while (elim->L!=NULL)
+            {
+                elim=elim->L;
+            }
+            while (elim!=NULL)
+            {
+                appoggio=elim->R;
+                free(elim);
+                elim=appoggio;
+            }
+		}
+	}
 	else if (front!=rear && front>rear)
 	{
 		for (int i=front;i<300;i++)
 		{
-					elemlistabidir *elim;
-					elemlistabidir *appoggio;
-					elim=queue[i].tbidirstack;
-					while (elim->L!=NULL)
-					{
-						elim=elim->L;
-					}
-					while (elim!=NULL)
-					{   	
-						appoggio=elim->R;
-						free(elim);
-						elim=appoggio;
-					}
+            elemlistabidir *elim;
+            elemlistabidir *appoggio;
+            elim=queue[i].tbidirstack;
+            while (elim->L!=NULL)
+            {
+                elim=elim->L;
+            }
+            while (elim!=NULL)
+            {
+                appoggio=elim->R;
+                free(elim);
+                elim=appoggio;
+            }
 		}
 	}
 	front=0;
@@ -165,7 +165,7 @@ void freestack()
 
 int main()
 {
-	
+
 	elemlistabidir *nuovoelemlista;
 	unsigned int maxpassi;
 	char carrun;
@@ -178,7 +178,7 @@ int main()
 	arraycelle *vett;
 	cellatransizioni *cursore, *nuovatr, *cursore2;
 	testaelemlista=NULL;
-	
+
 	int capacity=1;
 	int used=0;
 	vett=malloc(sizeof(arraycelle)*capacity);
@@ -191,7 +191,7 @@ int main()
 		{
 			if (statocorrente>used || statosucccor>used) //se si passa ad un nuovo stato, creazione nuovo slot
 			{
-				if (statocorrente>statosucccor) capacity=statocorrente+1;		
+				if (statocorrente>statosucccor) capacity=statocorrente+1;
 				else capacity=statosucccor+1;
 				vett=realloc(vett, sizeof(arraycelle)*capacity);
 				while (used+1<capacity)
@@ -199,10 +199,10 @@ int main()
 					for (int i=0; i<75; i++)
 					{
 						vett[used+1].cella[i]=NULL;
-					}	
+					}
 					used++;
 				}
-			}					
+			}
 			if (vett[statocorrente].cella[lettocor-48]==NULL) //se non e' ancora inizializzato
 			{
 				vett[statocorrente].cella[lettocor-48]=malloc(sizeof(cellatransizioni));
@@ -210,7 +210,7 @@ int main()
 				vett[statocorrente].cella[lettocor-48]->isfinal=false;
 				vett[statocorrente].cella[lettocor-48]->scritto=scrittocor;
 				vett[statocorrente].cella[lettocor-48]->direzione=direzionecor;
-				vett[statocorrente].cella[lettocor-48]->R=NULL;		
+				vett[statocorrente].cella[lettocor-48]->R=NULL;
 			}
 			else if (vett[statocorrente].cella[lettocor-48]!=NULL) //se e' gia presente lo stato concateno la nuova tr
 			{
@@ -218,12 +218,12 @@ int main()
 				nuovatr->statosucc=statosucccor;
 				nuovatr->scritto=scrittocor;
 				nuovatr->isfinal=false;
-				nuovatr->direzione=direzionecor;				
+				nuovatr->direzione=direzionecor;
 				nuovatr->R=vett[statocorrente].cella[lettocor-48];
 				vett[statocorrente].cella[lettocor-48]=nuovatr;
 			}
 		}
-		
+
 	}
 	int j=0;
 	numconv=1;
@@ -242,24 +242,24 @@ int main()
 					while (cursore!=NULL)
 					{
 						if (cursore->statosucc==accletto) cursore->isfinal=true;
-						cursore=cursore->R;	
+						cursore=cursore->R;
 					}
 				}
 				k++;
-			}	 
+			}
 		}
-	} 
+	}
  	/*j=0;
 	while (j<capacity) //stampa transizioni
 	{
 		int i=0;
-		while (i<75) 
+		while (i<75)
 		{
 			cursore=vett[j].cella[i];
 			while (cursore!=NULL)
 			{
 				printf("%d %c %c %d --> ", j, cursore->scritto, cursore->direzione, cursore->statosucc);
-				cursore=cursore->R;				
+				cursore=cursore->R;
 			}
 			i++;
 		}
@@ -268,7 +268,7 @@ int main()
 	}*/
 	int ris;
 	scanf("%s\n", lol); //legge max
-	
+
 	scanf("%u\n", &maxpassi);
 	//printf("%d\n", maxpassi);
 	scanf("%s\n", lol); //legge run
@@ -277,22 +277,22 @@ int main()
 	while(ris!=EOF) //scorre tutte le stringhe in input
 	{
 		testaelemlista=NULL;
-		
+
 		int p=0;
 		while (carrun!='\n' && ris!=EOF) //mette in lista bidir i caratteri
 		{
 			if (testaelemlista==NULL)
 			{
 				testaelemlista = malloc(sizeof(elemlistabidir));
-				testaelemlista->charletto[0]=carrun;	
-				testaelemlista->charletto[255]='\0';												
+				testaelemlista->charletto[0]=carrun;
+				testaelemlista->charletto[255]='\0';
 				testaelemlista->L=NULL;
 				testaelemlista->R=NULL;
 				elemcursore=testaelemlista;
 			}
 			else if (carrun=='\r')
 			{
-				
+
 			}
 			else if (p<=254)
 			{
@@ -302,19 +302,19 @@ int main()
 			{
 				p=0;
 				nuovoelemlista = malloc(sizeof(elemlistabidir));
-				nuovoelemlista->charletto[0]=carrun;	
-				nuovoelemlista->charletto[255]='\0';					
+				nuovoelemlista->charletto[0]=carrun;
+				nuovoelemlista->charletto[255]='\0';
 				nuovoelemlista->L=elemcursore;
 				nuovoelemlista->R=NULL;
 				elemcursore->R=nuovoelemlista;
-				elemcursore=nuovoelemlista; 
-			}			
+				elemcursore=nuovoelemlista;
+			}
 			ris=scanf("%c", &carrun);
 			//putchar(carrun);
 			p++;
 		}
-		
-		while (p<=254) 
+
+		while (p<=254)
 		{
 			elemcursore->charletto[p]='*';
 			p++;
@@ -322,12 +322,12 @@ int main()
 		elemcursore->charletto[255]='\0';
 		//DFS
 		cursore2=vett[0].cella[(testaelemlista->charletto[0])-48];
-		
-		
+
+
 		while (cursore2!=NULL)
-		{					
+		{
 			push(cursore2->isfinal, cursore2->statosucc, cursore2->scritto, 0, cursore2->direzione, copialista(testaelemlista),1,0);
-			cursore2=cursore2->R;							
+			cursore2=cursore2->R;
 		}
 		if (rear==0)
 		{
@@ -336,148 +336,148 @@ int main()
 		}
 	    nodo trpoppata;
 		unsigned int maxprof=0;
-		while(rear!=front) 
+		while(rear!=front)
 		{
-					trpoppata = pop();
-					int el=0;
-					if ((trpoppata.tbidirstack)->charletto[trpoppata.poscar]==trpoppata.scritto && trpoppata.statoatt==trpoppata.statosucc && trpoppata.direzione=='S')
-					{
-						maxprof=maxpassi;
-						goto qui;
-					}
-					if (trpoppata.statosucc==trpoppata.statoatt && (trpoppata.tbidirstack)->charletto[trpoppata.poscar]=='_' && trpoppata.scritto=='_' && ((trpoppata.direzione=='R' && trpoppata.tbidirstack->charletto[trpoppata.poscar+1]=='*') || (trpoppata.direzione=='L' && trpoppata.tbidirstack->charletto[trpoppata.poscar-1]=='*'))) 
-					{
-						maxprof=maxpassi;
-						goto qui;
-					}
-					
-					//printf("%c %c %d \t", trpoppata.scritto, trpoppata.direzione, trpoppata.statosucc);
-					if (maxprof<trpoppata.profondo)
-					{
-						maxprof=trpoppata.profondo;
-					}
-					(trpoppata.tbidirstack)->charletto[trpoppata.poscar]=trpoppata.scritto; //sostituisci carattere
-					if ((trpoppata.poscar)!=254 && trpoppata.direzione=='R') 
-					{
-						trpoppata.poscar=(trpoppata.poscar)+1;
-						if ((trpoppata.tbidirstack)->charletto[trpoppata.poscar]=='*')
-						{
-							(trpoppata.tbidirstack)->charletto[trpoppata.poscar]='_';						
-						}
-					}
-					else if ((trpoppata.poscar)!=0 && trpoppata.direzione=='L') 
-					{ 
-						trpoppata.poscar=(trpoppata.poscar)-1;
-						if ((trpoppata.tbidirstack)->charletto[trpoppata.poscar]=='*')
-						{
-							(trpoppata.tbidirstack)->charletto[trpoppata.poscar]='_';				
-						}
-					}
-					else if (trpoppata.direzione=='R' && (trpoppata.poscar)==254 && (trpoppata.tbidirstack)->R==NULL)
-					{
-						nuovoelemlista = malloc(sizeof(elemlistabidir));
-						nuovoelemlista->charletto[0]='_';
-						int p=1;
-						while (p<=254)
-						{
-							nuovoelemlista->charletto[p]='*';
-							p++;
-						}
-						nuovoelemlista->charletto[255]='\0';
-						nuovoelemlista->L=(trpoppata.tbidirstack);
-						nuovoelemlista->R=NULL;
-						trpoppata.poscar=0;
-						(trpoppata.tbidirstack)->R=nuovoelemlista;
-						(trpoppata.tbidirstack)=nuovoelemlista;
-					}
-					else if (trpoppata.direzione=='L' && (trpoppata.poscar)==0 && (trpoppata.tbidirstack)->L==NULL)
-					{
-						
-						nuovoelemlista = malloc(sizeof(elemlistabidir));
-						nuovoelemlista->charletto[254]='_';
-						nuovoelemlista->charletto[255]='\0';
-						int p=253;
-						while (p>=0)
-						{
-							nuovoelemlista->charletto[p]='*';
-							p--;
-						}
-								
-						nuovoelemlista->R=(trpoppata.tbidirstack);
-						nuovoelemlista->L=NULL;
-						trpoppata.poscar=254;
-						(trpoppata.tbidirstack)->L=nuovoelemlista;
-						(trpoppata.tbidirstack)=nuovoelemlista;
-					}
-					else if (trpoppata.direzione=='L' && (trpoppata.poscar)==0 && (trpoppata.tbidirstack)->L!=NULL)
-					{
-						(trpoppata.tbidirstack)=(trpoppata.tbidirstack)->L;
-						trpoppata.poscar=254;
-					}
-					else if (trpoppata.direzione=='R' && (trpoppata.poscar)==254 && (trpoppata.tbidirstack)->R!=NULL)
-					{
-						(trpoppata.tbidirstack)=(trpoppata.tbidirstack)->R;
-						trpoppata.poscar=0;
-					}
-					//stampalista(trpoppata.tbidirstack);
-					
-					cursore=vett[trpoppata.statosucc].cella[((trpoppata.tbidirstack)->charletto[trpoppata.poscar])-48];
-					
-					int visit=1;
-					if (trpoppata.profondo<maxpassi)
-					{
-						while (cursore!=NULL)
-						{
-							if (visit==1) 
-							{						
-								push(cursore->isfinal, cursore->statosucc, cursore->scritto, trpoppata.statosucc, cursore->direzione, trpoppata.tbidirstack, (trpoppata.profondo)+1, trpoppata.poscar);
-								visit=2;
-								el=1;			
-							}
-							else
-							{
-								push(cursore->isfinal, cursore->statosucc, cursore->scritto, trpoppata.statosucc, cursore->direzione, copialista(trpoppata.tbidirstack), (trpoppata.profondo)+1, trpoppata.poscar);
-								el=1;
-							}				
-							cursore=cursore->R;
-						}	
-					}
-					qui: if (el==0)
-					{
-						elemlistabidir *elim;
-						elemlistabidir *appoggio;		
-						elim=trpoppata.tbidirstack;
-						while (elim->L!=NULL)
-						{
-							elim=elim->L;
-						}
-						while (elim!=NULL)
-						{   	
-							appoggio=elim->R;
-							free(elim);
-							elim=appoggio;
-						}
-					}
-					if (trpoppata.isfinal==true)
-					{
-						printf("1\n");
-						break;
-					}
-					if (maxprof==maxpassi && front==rear)
-					{
-						printf("U\n");
-						break;
-					}
-					if (front==rear && maxprof<maxpassi)
-					{
-						printf("0\n");
-						break;
-					}
-	
+            trpoppata = pop();
+            int el=0;
+            if ((trpoppata.tbidirstack)->charletto[trpoppata.poscar]==trpoppata.scritto && trpoppata.statoatt==trpoppata.statosucc && trpoppata.direzione=='S')
+            {
+                maxprof=maxpassi;
+                goto qui;
+            }
+            if (trpoppata.statosucc==trpoppata.statoatt && (trpoppata.tbidirstack)->charletto[trpoppata.poscar]=='_' && trpoppata.scritto=='_' && ((trpoppata.direzione=='R' && trpoppata.tbidirstack->charletto[trpoppata.poscar+1]=='*') || (trpoppata.direzione=='L' && trpoppata.tbidirstack->charletto[trpoppata.poscar-1]=='*')))
+            {
+                maxprof=maxpassi;
+                goto qui;
+            }
+
+            //printf("%c %c %d \t", trpoppata.scritto, trpoppata.direzione, trpoppata.statosucc);
+            if (maxprof<trpoppata.profondo)
+            {
+                maxprof=trpoppata.profondo;
+            }
+            (trpoppata.tbidirstack)->charletto[trpoppata.poscar]=trpoppata.scritto; //sostituisci carattere
+            if ((trpoppata.poscar)!=254 && trpoppata.direzione=='R')
+            {
+                trpoppata.poscar=(trpoppata.poscar)+1;
+                if ((trpoppata.tbidirstack)->charletto[trpoppata.poscar]=='*')
+                {
+                    (trpoppata.tbidirstack)->charletto[trpoppata.poscar]='_';
+                }
+            }
+            else if ((trpoppata.poscar)!=0 && trpoppata.direzione=='L')
+            {
+                trpoppata.poscar=(trpoppata.poscar)-1;
+                if ((trpoppata.tbidirstack)->charletto[trpoppata.poscar]=='*')
+                {
+                    (trpoppata.tbidirstack)->charletto[trpoppata.poscar]='_';
+                }
+            }
+            else if (trpoppata.direzione=='R' && (trpoppata.poscar)==254 && (trpoppata.tbidirstack)->R==NULL)
+            {
+                nuovoelemlista = malloc(sizeof(elemlistabidir));
+                nuovoelemlista->charletto[0]='_';
+                int p=1;
+                while (p<=254)
+                {
+                    nuovoelemlista->charletto[p]='*';
+                    p++;
+                }
+                nuovoelemlista->charletto[255]='\0';
+                nuovoelemlista->L=(trpoppata.tbidirstack);
+                nuovoelemlista->R=NULL;
+                trpoppata.poscar=0;
+                (trpoppata.tbidirstack)->R=nuovoelemlista;
+                (trpoppata.tbidirstack)=nuovoelemlista;
+            }
+            else if (trpoppata.direzione=='L' && (trpoppata.poscar)==0 && (trpoppata.tbidirstack)->L==NULL)
+            {
+
+                nuovoelemlista = malloc(sizeof(elemlistabidir));
+                nuovoelemlista->charletto[254]='_';
+                nuovoelemlista->charletto[255]='\0';
+                int p=253;
+                while (p>=0)
+                {
+                    nuovoelemlista->charletto[p]='*';
+                    p--;
+                }
+
+                nuovoelemlista->R=(trpoppata.tbidirstack);
+                nuovoelemlista->L=NULL;
+                trpoppata.poscar=254;
+                (trpoppata.tbidirstack)->L=nuovoelemlista;
+                (trpoppata.tbidirstack)=nuovoelemlista;
+            }
+            else if (trpoppata.direzione=='L' && (trpoppata.poscar)==0 && (trpoppata.tbidirstack)->L!=NULL)
+            {
+                (trpoppata.tbidirstack)=(trpoppata.tbidirstack)->L;
+                trpoppata.poscar=254;
+            }
+            else if (trpoppata.direzione=='R' && (trpoppata.poscar)==254 && (trpoppata.tbidirstack)->R!=NULL)
+            {
+                (trpoppata.tbidirstack)=(trpoppata.tbidirstack)->R;
+                trpoppata.poscar=0;
+            }
+            //stampalista(trpoppata.tbidirstack);
+
+            cursore=vett[trpoppata.statosucc].cella[((trpoppata.tbidirstack)->charletto[trpoppata.poscar])-48];
+
+            int visit=1;
+            if (trpoppata.profondo<maxpassi)
+            {
+                while (cursore!=NULL)
+                {
+                    if (visit==1)
+                    {
+                        push(cursore->isfinal, cursore->statosucc, cursore->scritto, trpoppata.statosucc, cursore->direzione, trpoppata.tbidirstack, (trpoppata.profondo)+1, trpoppata.poscar);
+                        visit=2;
+                        el=1;
+                    }
+                    else
+                    {
+                        push(cursore->isfinal, cursore->statosucc, cursore->scritto, trpoppata.statosucc, cursore->direzione, copialista(trpoppata.tbidirstack), (trpoppata.profondo)+1, trpoppata.poscar);
+                        el=1;
+                    }
+                    cursore=cursore->R;
+                }
+            }
+            qui: if (el==0)
+            {
+                elemlistabidir *elim;
+                elemlistabidir *appoggio;
+                elim=trpoppata.tbidirstack;
+                while (elim->L!=NULL)
+                {
+                    elim=elim->L;
+                }
+                while (elim!=NULL)
+                {
+                    appoggio=elim->R;
+                    free(elim);
+                    elim=appoggio;
+                }
+            }
+            if (trpoppata.isfinal==true)
+            {
+                printf("1\n");
+                break;
+            }
+            if (maxprof==maxpassi && front==rear)
+            {
+                printf("U\n");
+                break;
+            }
+            if (front==rear && maxprof<maxpassi)
+            {
+                printf("0\n");
+                break;
+            }
+
 		}
-		
+
 		fine: freestack();
-		
+
 		elemcursore=testaelemlista;
 		while (elemcursore->L!=NULL) //mi sposto tutto a sx
 		{
@@ -489,18 +489,18 @@ int main()
 			free(elemcursore);
 			elemcursore=nuovoelemlista;
 		}
-		
+
 		ris=scanf("%c", &carrun);
 		//putchar(carrun);
 	}
-	
+
 	j=0;
 	while (j<capacity) //libera lista tr
 		{
 			for (int k=0; k<75; k++)
 			{
 				if (vett[j].cella[k]!=NULL)
-				{				
+				{
 					cursore=vett[j].cella[k]->R;
 					free(vett[j].cella[k]);
 					while (cursore!=NULL)
@@ -516,5 +516,3 @@ int main()
 	free(vett);
 	return 0;
 }
-
-
